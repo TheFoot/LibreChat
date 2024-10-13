@@ -1,6 +1,7 @@
 name: thefootai
 
 services:
+
   librechat:
     env_file:
       - ./.env
@@ -9,9 +10,21 @@ services:
       - "3080:3080"
     depends_on:
       - mongo
+      - meilisearch
     volumes:
       - ../thefoot:/app/thefoot
       - ../thefoot/librechat.yaml:/app/librechat.yaml
+    networks:
+      - theFootAiLocal
+
+  meilisearch:
+    env_file:
+      - ./meili.env
+    image: getmeili/meilisearch:latest
+    ports:
+      - "7700:7700"
+    volumes:
+      - meili-data:/meili_data
     networks:
       - theFootAiLocal
 
@@ -26,6 +39,7 @@ services:
 
 volumes:
   mongo-data:
+  meili-data:
 
 networks:
   theFootAiLocal:
