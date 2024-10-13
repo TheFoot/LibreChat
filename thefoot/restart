@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Navigate to thefoot directory
+cd "$(dirname "$0")"
+
+./stop
+./start

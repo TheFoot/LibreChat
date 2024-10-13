@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Navigate to thefoot directory
+cd "$(dirname "$0")"
+
+# Run Docker Compose with the custom configuration
+echo "Stopping LibreChat..."
+docker compose -f docker-compose.yml down
+
+# Stopping Ollama
+echo "Stopping Ollama..."
+rm -rf /Applications/Ollama.app; pkill ollama

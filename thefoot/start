@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Navigate to thefoot directory
+cd "$(dirname "$0")"
+
+# Start ollama server
+echo "Starting Ollama..."
+OLLAMA_HOST=0.0.0.0 ollama serve > /dev/null 2>&1 &
+sleep 5
+echo "Ollama is running in the background."
+
+# Preload Llama3.1
+echo "Preloading Llama3.1..."
+ollama run llama3.1 "" > /dev/null 2>&1
+
+# Run Docker Compose with the custom configuration
+echo "Starting LibreChat..."
+docker compose -f docker-compose.yml up -d

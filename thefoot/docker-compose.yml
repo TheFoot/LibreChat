@@ -1,0 +1,32 @@
+name: thefootai
+
+services:
+  librechat:
+    env_file:
+      - ./.env
+    image: librechat/librechat:latest
+    ports:
+      - "3080:3080"
+    depends_on:
+      - mongo
+    volumes:
+      - ../thefoot:/app/thefoot
+      - ../thefoot/librechat.yaml:/app/librechat.yaml
+    networks:
+      - theFootAiLocal
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - theFootAiLocal
+
+volumes:
+  mongo-data:
+
+networks:
+  theFootAiLocal:
+    driver: bridge
