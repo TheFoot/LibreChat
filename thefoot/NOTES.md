@@ -1,13 +1,17 @@
 # Mac // Docker // Ollama
 .. uses CPUs as docker desktop does not expose GPUs to the containers.
 
-# Ollama
+# Native Ollama
 Models must first be downloaded and then pre-loaded (optional) using:
 
 ```bash
-docker exec -it thefootai-ollama-1 bash
+
+# Download
 ollama pull llama3.1
-ollama load llama3.1
+
+# Load into memory
+ollama run llama3.1 ""
+
 ```
 
 List models:
